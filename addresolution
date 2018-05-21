@@ -1,0 +1,18 @@
+#!/usr/bin/python
+import argparse
+import subprocess
+import os
+parser = argparse.ArgumentParser(description="Add a custom screen resolution")
+parser.add_argument('name', type=str, nargs=1, help="The name for the resolution, ie: 'MacBook 13in native'")
+parser.add_argument('width', type=int, nargs=1, help="The width of the resolution in pixels, ie: 1280")
+parser.add_argument('height', type=int, nargs=1, help="The height of the resolution in pixels, ie: 800")
+#parser.add_argument('depth', type=int, nargs="?", help="The depth of the resolution in bits, ie: 24", default=[24])
+args = parser.parse_args()
+
+cmd = ["xrandr", "--newmode", '"%s"' % (args.name[0]), "0", str(args.width[0]), "0", "0", "0", str(args.height[0]), "0", "0", "0"]
+cmd2 = ["xrandr", "--addmode", "screen", '"%s"' % (args.name[0])]
+
+FNULL = open(os.devnull, 'w')
+
+subprocess.call(cmd, stdout=FNULL, stderr=subprocess.STDOUT)
+subprocess.call(cmd2, stdout=FNULL, stderr=subprocess.STDOUT)
