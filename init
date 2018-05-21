@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ -z "$XWIDTH" ]; then
+    export XWIDTH=5120
+fi
+
+if [ -z "$XHEIGHT" ]; then
+    export XHEIGHT=2880
+fi
+
+if [ -z "$XDEPTH" ]; then
+    export XDEPTH=24
+fi
+
+# start Xvfb
+# port 6000
+Xvfb :0 -ac -listen tcp -screen 0 $XWIDTH\x$XHEIGHT\x$XDEPTH &
+sleep 3
+
+# start FluxBox window manager
+export DISPLAY=:0
+/usr/bin/fluxbox -display :0 -screen 0 &
+sleep 3
+
+# start X11VNC
+export XRECORD_THREADS=1
+x11vnc -display :0 -skip_lockkeys -loop -rfbauth /root/.vnc/passwd -skip_dups -repeat -noxfixes -nonc -ping 2 -threads -noxdamage
+
+# to set password, use x11vnc -storepasswd
