@@ -1,5 +1,5 @@
 # docker-x11vnc
-Docker container for X window client, accessed via VNC
+Docker container for X window client, accessed via VNC. Supports multiple resolutions and on-the-fly resolution changes.
 
 # Launching the container
 ```
