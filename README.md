@@ -1,3 +1,9 @@
+# THIS IMAGE IS DEPRECATED! #
+
+Please use the significantly better jlesage/baseimage-gui image instead. Thanks.
+
+--------------------
+
 # docker-x11vnc
 Docker container for X window client, accessed via VNC. Supports multiple resolutions and on-the-fly resolution changes.
 
